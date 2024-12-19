@@ -1,0 +1,27 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+
+{% block title %}
+    Quiz
+{% endblock title %}
+{% block body %}
+<div class="absolute top-0 right-0 m-4 p-2 bg-white text-black rounded shadow-lg text-2xl">
+    <span id="timer">00:00</span>
+</div>
+
+
+<div id="quiz-container" class="flex justify-center h-screen">
+
+</div>
+{% endblock body %}
+
+{% block scripts %}
+  <script>
+    const QUESTIONS = {{questions|safe}};
+    const CSRF = "{{csrf_token}}";
+  </script>
+  <script src="{% static 'js/quiz.js' %}"></script>
+{% endblock scripts %}
+  
+    
+    

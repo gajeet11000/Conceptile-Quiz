@@ -1,0 +1,79 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+
+{% block title %}
+    Quiz Result
+{% endblock title %}
+
+{% block body %}
+
+<div class="flex items-center justify-center h-screen">
+  <div class="text-white">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4 ">Quiz Result</h1>
+        <div class="max-w-md mx-auto">
+            <h2 class="text-2xl font-semibold mt-4">
+                {% if result.percentage >= 75 %}
+                    Excellent work! You scored {{ result.percentage }}%!  🙂
+                {% elif result.percentage >= 50 %}
+                    Great job! You scored {{ result.percentage }}%.  🙂
+                {% elif result.percentage >= 25 %}
+                    You scored {{ result.percentage }}%. Keep trying!  😐
+                {% else %}
+                    Don't be discouraged. You scored {{ result.percentage }}%. Keep practicing!  😔
+                {% endif %}
+            </h2>
+            <h3 class="text-xl font-bold mt-2">
+              Total Questions {{result.total}}
+            </h3>
+        </div>
+    </div>
+    <canvas id="resultChart" class="mt-8" style="display: flex; width: 600px; max-width: 600px;"></canvas>
+
+
+    <div class="flex justify-center ">
+      <a href="/" class="inline-block justify-center items-center mt-6 px-6 py-3 text-white font-semibold rounded-lg no-underline shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+          Take another quiz?
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+<script>
+
+var yValues = [{{result.correct}}, {{result.incorrect}}, {{result.not_attempted}}];
+var xValues = ["Correct (" + {{result.correct}} + ")", "Incorrect (" + {{result.incorrect}} + ")", "Not Attempted (" + {{result.not_attempted}} + ")"];
+var barColors = [
+  "#00FF00", "#FF0000", "#808080"
+];
+
+
+new Chart("resultChart", {
+  aspectRatio:1.5,
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {
+      labels: {
+        fontColor: "white",
+        fontSize: 16,
+      },
+      position: "bottom",
+    },
+  },
+});
+</script>
+
+{% endblock scripts %}
+    
