@@ -15,6 +15,8 @@ def index(request):
             quiz_session.save()
             
             return redirect('quiz', uuid=quiz_session.uuid)
+        else:
+            return render(request, 'quiz/index.html', {'form': quiz_form})
         
     return render(request, 'quiz/index.html')
     
