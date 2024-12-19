@@ -14,12 +14,12 @@
             <form method="post" action="{% url 'index' %}"">
                 {% csrf_token %}
                 <div>
-                  <label for="num_questions" class="text-lg mb-2">Please enter the number of questions</label>
+                  <label for="num_questions" class="text-xl mb-2">Please enter the number of questions</label>
                     <input type="text" name="num_questions" placeholder="Eg- 7, 10, 18" class="form-control block w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                       {% if form.num_questions.errors %}
-                        <ul class="text-red-600 mt-1 text-sm">
+                        <ul class=" mt-1 text-sm">
                             {% for error in form.num_questions.errors %}
-                                <li class="text-white">{{ error }}</li>
+                                <li class="text-white text-lg">{{ error }}</li>
                             {% endfor %}
                         </ul>
                       {% endif %}
